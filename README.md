@@ -181,6 +181,9 @@ https://engineeringxpert.com/wp-content/uploads/2022/04/26.png
  
 
 ## STM 32 CUBE PROGRAM :
+developed by: Kabilan V
+
+register number:212222100018
 ```
 #include "main.h"
 #include <stdbool.h>
@@ -257,19 +260,19 @@ void key()
 	if(!col1)
 	{
 		Lcd_cursor(&lcd,0,1);
-		Lcd_string(&lcd,"key 7\n");
+		Lcd_string(&lcd,"key 4\n");
 		col1=1;
 	}
 	else if(!col2)
 	{
 		Lcd_cursor(&lcd,0,1);
-		Lcd_string(&lcd,"key 8\n");
+		Lcd_string(&lcd,"key 5\n");
 		col2=1;
 	}
 	else if(!col3)
 	{
 		Lcd_cursor(&lcd,0,1);
-		Lcd_string(&lcd,"key 9\n");
+		Lcd_string(&lcd,"key 6\n");
 		col3=1;
 	}
 	else if(!col4)
@@ -293,19 +296,19 @@ void key()
 	if(!col1)
 	{
 		Lcd_cursor(&lcd,0,1);
-		Lcd_string(&lcd,"key 7\n");
+		Lcd_string(&lcd,"key 1\n");
 		col1=1;
 	}
 	else if(!col2)
 	{
 		Lcd_cursor(&lcd,0,1);
-		Lcd_string(&lcd,"key 8\n");
+		Lcd_string(&lcd,"key 2\n");
 		col2=1;
 		}
 	else if(!col3)
 	{
 		Lcd_cursor(&lcd,0,1);
-		Lcd_string(&lcd,"key 9\n");
+		Lcd_string(&lcd,"key 3\n");
 		col3=1;
 	}
 	else if(!col4)
@@ -439,17 +442,16 @@ void assert_failed(uint8_t *file, uint32_t line)
 }
 #endif
 ```
-programmed by:Kabilan V
-REG NO: 212222100018
 
 
 ## Output screen shots of proteus  :
-![Screenshot 2023-05-23 115158](https://github.com/lathishlathish/EXPERIMENT--05-INTERFACING-A-4X4-MATRIX-KEYPAD-AND-DISPLAY-THE-OUTPUT-ON-LCD/assets/120359170/21c1d6dc-7c6f-4d36-b2cb-a3c28e306964)
+![image](https://github.com/kabilan22000284/EXPERIMENT--05-INTERFACING-A-4X4-MATRIX-KEYPAD-AND-DISPLAY-THE-OUTPUT-ON-LCD/assets/123469171/fd13649d-14c0-420e-99e5-3244ba212670)
 
  
  
  ## CIRCUIT DIAGRAM (EXPORT THE GRAPHICS TO PDF AND ADD THE SCREEN SHOT HERE): 
- ![0987654321](https://github.com/lathishlathish/EXPERIMENT--05-INTERFACING-A-4X4-MATRIX-KEYPAD-AND-DISPLAY-THE-OUTPUT-ON-LCD/assets/120359170/89dbad14-7efe-45ee-91e6-1f98825bcc73)
+![image](https://github.com/kabilan22000284/EXPERIMENT--05-INTERFACING-A-4X4-MATRIX-KEYPAD-AND-DISPLAY-THE-OUTPUT-ON-LCD/assets/123469171/b34a0776-f3bb-4da5-8ad2-e15a18954298)
+
 
  
  
