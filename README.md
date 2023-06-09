@@ -1,4 +1,4 @@
-# EXPERIMENT--05-INTERFACING-A-4X4-MATRIX-KEYPAD-AND-DISPLAY-THE-OUTPUT-ON-LCD:
+# EXPERIMENT--05-INTERFACING-A-4X4-MATRIX-KEYPAD-AND-DISPLAY-THE-OUTPUT-ON-LCD
 
 ## Aim: 
 To Interface a 4X4 matrix keypad and show the output on 16X2 LCD display to ARM controller , and simulate it in Proteus
@@ -181,193 +181,196 @@ https://engineeringxpert.com/wp-content/uploads/2022/04/26.png
  
 
 ## STM 32 CUBE PROGRAM :
-developed by: Kabilan V
-
-register number:212222100018
 ```
+
 #include "main.h"
 #include <stdbool.h>
 #include "lcd.h"
+
 bool col1,col2,col3,col4;
+void SystemClock_config(void);
+
+
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
-void key();
 
 int main(void)
 {
-	HAL_Init();
-	SystemClock_Config();
-	MX_GPIO_Init();
-	while (1)
-	{
-		key();
-		HAL_Delay(1000);
-	}
+  
+  HAL_Init();
+
+  SystemClock_Config();
+
+
+  MX_GPIO_Init();
+  
+  while (1)
+  {
+    key();
+    HAL_Delay(1000);
+  }
+ 
 }
+
 void key()
 {
-	Lcd_PortType ports[]={GPIOA,GPIOA,GPIOA,GPIOA};
-	Lcd_PinType pins[]={GPIO_PIN_3,GPIO_PIN_2,GPIO_PIN_1,GPIO_PIN_0};
-	Lcd_HandleTypeDef lcd;
-	lcd=Lcd_create(ports,pins,GPIOB,GPIO_PIN_0,GPIOB,GPIO_PIN_1,LCD_4_BIT_MODE);
+	 Lcd_PortType ports[] = { GPIOA, GPIOA, GPIOA, GPIOA };
+	  Lcd_PinType pins[] = { GPIO_PIN_3, GPIO_PIN_2, GPIO_PIN_1, GPIO_PIN_0 };
+	  Lcd_HandleTypeDef lcd;
+	  lcd = Lcd_create(ports, pins, GPIOB, GPIO_PIN_0, GPIOB, GPIO_PIN_1, LCD_4_BIT_MODE);
 
-	HAL_GPIO_WritePin(GPIOC,GPIO_PIN_0,GPIO_PIN_RESET);
-	HAL_GPIO_WritePin(GPIOC,GPIO_PIN_1,GPIO_PIN_SET);
-	HAL_GPIO_WritePin(GPIOC,GPIO_PIN_2,GPIO_PIN_SET);
-	HAL_GPIO_WritePin(GPIOC,GPIO_PIN_3,GPIO_PIN_SET);
 
-	col1 = HAL_GPIO_ReadPin(GPIOC,GPIO_PIN_4);
-	col2 = HAL_GPIO_ReadPin(GPIOC,GPIO_PIN_5);
-	col3 = HAL_GPIO_ReadPin(GPIOC,GPIO_PIN_6);
-	col4 = HAL_GPIO_ReadPin(GPIOC,GPIO_PIN_7);
+	  HAL_GPIO_WritePin(GPIOC, GPIO_PIN_0, GPIO_PIN_RESET);
+	  HAL_GPIO_WritePin(GPIOC, GPIO_PIN_1, GPIO_PIN_SET);
+	  HAL_GPIO_WritePin(GPIOC, GPIO_PIN_2, GPIO_PIN_SET);
+	  HAL_GPIO_WritePin(GPIOC, GPIO_PIN_3, GPIO_PIN_SET);
 
-	if(!col1)
-	{
-		Lcd_cursor(&lcd,0,1);
-		Lcd_string(&lcd,"key 7\n");
-		col1=1;
-	}
-	else if(!col2)
-	{
-		Lcd_cursor(&lcd,0,1);
-		Lcd_string(&lcd,"key 8\n");
-		col2=1;
-	}
-	else if(!col3)
-	{
-		Lcd_cursor(&lcd,0,1);
-		Lcd_string(&lcd,"key 9\n");
-		col3=1;
-	}
-	else if(!col4)
-	{
-		Lcd_cursor(&lcd,0,1);
-		Lcd_string(&lcd,"key / \n");
-		col4=1;
-	}
-	HAL_Delay(500);
+	  col1 = HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_4);
+	  col2 = HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_5);
+	  col3 = HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_6);
+	  col4 = HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_7);
+	  if(!col1)
+	  {
+		  Lcd_cursor(&lcd, 0,1);
+		  Lcd_string(&lcd, " 7\n");
+		  col1=1;
+	  }
+	  else if(!col2)
+	  {
+	  		  Lcd_cursor(&lcd, 0,1);
+	  		  Lcd_string(&lcd, " 8\n");
+	  		  col2=1;
+	  }
+	  else if(!col3)
+	  	  {
+	  	  		  Lcd_cursor(&lcd, 0,1);
+	  	  		  Lcd_string(&lcd, "9\n");
+	  	  		  col3=1;
+	  	  }
+	  else if(!col4)
+	  	  {
+	  	  		  Lcd_cursor(&lcd, 0,1);
+	  	  		  Lcd_string(&lcd, "/ \n");
+	  	  		  col4=1;
+	  	  }
+	  HAL_Delay(200);
+	  HAL_GPIO_WritePin(GPIOC, GPIO_PIN_0, GPIO_PIN_SET);
+	  	  HAL_GPIO_WritePin(GPIOC, GPIO_PIN_1, GPIO_PIN_RESET);
+	  	  HAL_GPIO_WritePin(GPIOC, GPIO_PIN_2, GPIO_PIN_SET);
+	  	  HAL_GPIO_WritePin(GPIOC, GPIO_PIN_3, GPIO_PIN_SET);
 
-	HAL_GPIO_WritePin(GPIOC,GPIO_PIN_0,GPIO_PIN_SET);
-	HAL_GPIO_WritePin(GPIOC,GPIO_PIN_1,GPIO_PIN_RESET);
-	HAL_GPIO_WritePin(GPIOC,GPIO_PIN_2,GPIO_PIN_SET);
-	HAL_GPIO_WritePin(GPIOC,GPIO_PIN_3,GPIO_PIN_SET);
+	  	  col1 = HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_4);
+	  	  col2 = HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_5);
+	  	  col3 = HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_6);
+	  	  col4 = HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_7);
+	  	  if(!col1)
+	  	  {
+	  		  Lcd_cursor(&lcd, 0,1);
+	  		  Lcd_string(&lcd, " 4\n");
+	  		  col1=1;
+	  	  }
+	  	  else if(!col2)
+	  	  {
+	  	  		  Lcd_cursor(&lcd, 0,1);
+	  	  		  Lcd_string(&lcd, " 5\n");
+	  	  		  col2=1;
+	  	  }
+	  	  else if(!col3)
+	  	  	  {
+	  	  	  		  Lcd_cursor(&lcd, 0,1);
+	  	  	  		  Lcd_string(&lcd, " 6\n");
+	  	  	  		  col3=1;
+	  	  	  }
+	  	  else if(!col4)
+	  	  	  {
+	  	  	  		  Lcd_cursor(&lcd, 0,1);
+	  	  	  		  Lcd_string(&lcd, " X\n");
+	  	  	  		  col4=1;
+	  	  	  }
+	  	HAL_Delay(200);
+	  	HAL_GPIO_WritePin(GPIOC, GPIO_PIN_0, GPIO_PIN_SET);
+	  		  HAL_GPIO_WritePin(GPIOC, GPIO_PIN_1, GPIO_PIN_SET);
+	  		  HAL_GPIO_WritePin(GPIOC, GPIO_PIN_2, GPIO_PIN_RESET);
+	  		  HAL_GPIO_WritePin(GPIOC, GPIO_PIN_3, GPIO_PIN_SET);
 
-	col1 = HAL_GPIO_ReadPin(GPIOC,GPIO_PIN_4);
-	col2 = HAL_GPIO_ReadPin(GPIOC,GPIO_PIN_5);
-	col3 = HAL_GPIO_ReadPin(GPIOC,GPIO_PIN_6);
-	col4 = HAL_GPIO_ReadPin(GPIOC,GPIO_PIN_7);
+	  		  col1 = HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_4);
+	  		  col2 = HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_5);
+	  		  col3 = HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_6);
+	  		  col4 = HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_7);
+	  		  if(!col1)
+	  		  {
+	  			  Lcd_cursor(&lcd, 0,1);
+	  			  Lcd_string(&lcd, "1\n");
+	  			  col1=1;
+	  		  }
+	  		  else if(!col2)
+	  		  {
+	  		  		  Lcd_cursor(&lcd, 0,1);
+	  		  		  Lcd_string(&lcd, " 2\n");
+	  		  		  col2=1;
+	  		  }
+	  		  else if(!col3)
+	  		  	  {
+	  		  	  		  Lcd_cursor(&lcd, 0,1);
+	  		  	  		  Lcd_string(&lcd, "3\n");
+	  		  	  		  col3=1;
+	  		  	  }
+	  		  else if(!col4)
+	  		  	  {
+	  		  	  		  Lcd_cursor(&lcd, 0,1);
+	  		  	  		  Lcd_string(&lcd, "-\n");
+	  		  	  		  col4=1;
+	  		  	  }
+	  		  HAL_Delay(200);
+	  		HAL_GPIO_WritePin(GPIOC, GPIO_PIN_0, GPIO_PIN_SET);
+	  			  HAL_GPIO_WritePin(GPIOC, GPIO_PIN_1, GPIO_PIN_SET);
+	  			  HAL_GPIO_WritePin(GPIOC, GPIO_PIN_2, GPIO_PIN_SET);
+	  			  HAL_GPIO_WritePin(GPIOC, GPIO_PIN_3, GPIO_PIN_RESET);
 
-	if(!col1)
-	{
-		Lcd_cursor(&lcd,0,1);
-		Lcd_string(&lcd,"key 4\n");
-		col1=1;
-	}
-	else if(!col2)
-	{
-		Lcd_cursor(&lcd,0,1);
-		Lcd_string(&lcd,"key 5\n");
-		col2=1;
-	}
-	else if(!col3)
-	{
-		Lcd_cursor(&lcd,0,1);
-		Lcd_string(&lcd,"key 6\n");
-		col3=1;
-	}
-	else if(!col4)
-	{
-		Lcd_cursor(&lcd,0,1);
-		Lcd_string(&lcd,"key / \n");
-		col4=1;
-	}
-	HAL_Delay(500);
-
-	HAL_GPIO_WritePin(GPIOC,GPIO_PIN_0,GPIO_PIN_SET);
-	HAL_GPIO_WritePin(GPIOC,GPIO_PIN_1,GPIO_PIN_SET);
-	HAL_GPIO_WritePin(GPIOC,GPIO_PIN_2,GPIO_PIN_RESET);
-	HAL_GPIO_WritePin(GPIOC,GPIO_PIN_3,GPIO_PIN_SET);
-
-	col1 = HAL_GPIO_ReadPin(GPIOC,GPIO_PIN_4);
-	col2 = HAL_GPIO_ReadPin(GPIOC,GPIO_PIN_5);
-	col3 = HAL_GPIO_ReadPin(GPIOC,GPIO_PIN_6);
-	col4 = HAL_GPIO_ReadPin(GPIOC,GPIO_PIN_7);
-
-	if(!col1)
-	{
-		Lcd_cursor(&lcd,0,1);
-		Lcd_string(&lcd,"key 1\n");
-		col1=1;
-	}
-	else if(!col2)
-	{
-		Lcd_cursor(&lcd,0,1);
-		Lcd_string(&lcd,"key 2\n");
-		col2=1;
-		}
-	else if(!col3)
-	{
-		Lcd_cursor(&lcd,0,1);
-		Lcd_string(&lcd,"key 3\n");
-		col3=1;
-	}
-	else if(!col4)
-	{
-		Lcd_cursor(&lcd,0,1);
-		Lcd_string(&lcd,"key / \n");
-		col4=1;
-	}
-	HAL_Delay(500);
-
-	HAL_GPIO_WritePin(GPIOC,GPIO_PIN_0,GPIO_PIN_SET);
-	HAL_GPIO_WritePin(GPIOC,GPIO_PIN_1,GPIO_PIN_SET);
-	HAL_GPIO_WritePin(GPIOC,GPIO_PIN_2,GPIO_PIN_SET);
-	HAL_GPIO_WritePin(GPIOC,GPIO_PIN_3,GPIO_PIN_RESET);
-
-	col1 = HAL_GPIO_ReadPin(GPIOC,GPIO_PIN_4);
-	col2 = HAL_GPIO_ReadPin(GPIOC,GPIO_PIN_5);
-	col3 = HAL_GPIO_ReadPin(GPIOC,GPIO_PIN_6);
-	col4 = HAL_GPIO_ReadPin(GPIOC,GPIO_PIN_7);
-
-	if(!col1)
-	{
-		Lcd_cursor(&lcd,0,1);
-		Lcd_string(&lcd,"key 7\n");
-		col1=1;
-	}
-	else if(!col2)
-	{
-		Lcd_cursor(&lcd,0,1);
-		Lcd_string(&lcd,"key 8\n");
-		col2=1;
-	}
-	else if(!col3)
-	{
-		Lcd_cursor(&lcd,0,1);
-		Lcd_string(&lcd,"key 9\n");
-		col3=1;
-	}
-	else if(!col4)
-	{
-		Lcd_cursor(&lcd,0,1);
-		Lcd_string(&lcd,"key / \n");
-		col4=1;
-	}
-	else
-	{
-		Lcd_cursor(&lcd,0,1);
-		Lcd_string(&lcd,"NO KEY PRESSED\n");
-	}
+	  			  col1 = HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_4);
+	  			  col2 = HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_5);
+	  			  col3 = HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_6);
+	  			  col4 = HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_7);
+	  			  if(!col1)
+	  			  {
+	  				  Lcd_cursor(&lcd, 0,1);
+	  				  Lcd_string(&lcd, "ON/C\n");
+	  				  col1=1;
+	  			  }
+	  			  else if(!col2)
+	  			  {
+	  			  		  Lcd_cursor(&lcd, 0,1);
+	  			  		  Lcd_string(&lcd, " 0\n");
+	  			  		  col2=1;
+	  			  }
+	  			  else if(!col3)
+	  			  	  {
+	  			  	  		  Lcd_cursor(&lcd, 0,1);
+	  			  	  		  Lcd_string(&lcd, " =\n");
+	  			  	  		  col3=1;
+	  			  	  }
+	  			  else if(!col4)
+	  			  	  {
+	  			  	  		  Lcd_cursor(&lcd, 0,1);
+	  			  	  		  Lcd_string(&lcd, " +\n");
+	  			  	  		  col4=1;
+	  			  	  }
+	  			  else
+	  			  {
+	  				  Lcd_cursor(&lcd,0,1);
+	  				  Lcd_string(&lcd,"no key pressed");
+	  			  }
 }
-
 
 void SystemClock_Config(void)
 {
   RCC_OscInitTypeDef RCC_OscInitStruct = {0};
   RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
 
+ 
   __HAL_RCC_PWR_CLK_ENABLE();
   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE2);
+  
   RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSI;
   RCC_OscInitStruct.HSIState = RCC_HSI_ON;
   RCC_OscInitStruct.HSICalibrationValue = RCC_HSICALIBRATION_DEFAULT;
@@ -376,6 +379,7 @@ void SystemClock_Config(void)
   {
     Error_Handler();
   }
+  
   RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
                               |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_HSI;
@@ -389,6 +393,7 @@ void SystemClock_Config(void)
   }
 }
 
+
 static void MX_GPIO_Init(void)
 {
   GPIO_InitTypeDef GPIO_InitStruct = {0};
@@ -397,26 +402,34 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOA_CLK_ENABLE();
   __HAL_RCC_GPIOB_CLK_ENABLE();
 
-  HAL_GPIO_WritePin(GPIOC, GPIO_PIN_0|GPIO_PIN_1|GPIO_PIN_2|GPIO_PIN_3, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOC, GPIO_PIN_0|GPIO_PIN_1|GPIO_PIN_2, GPIO_PIN_RESET);
 
   HAL_GPIO_WritePin(GPIOA, GPIO_PIN_0|GPIO_PIN_1|GPIO_PIN_2|GPIO_PIN_3, GPIO_PIN_RESET);
 
   HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0|GPIO_PIN_1, GPIO_PIN_RESET);
 
-  GPIO_InitStruct.Pin = GPIO_PIN_0|GPIO_PIN_1|GPIO_PIN_2|GPIO_PIN_3;
+  GPIO_InitStruct.Pin = GPIO_PIN_0|GPIO_PIN_1|GPIO_PIN_2;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
+
+  GPIO_InitStruct.Pin = GPIO_PIN_3;
+  GPIO_InitStruct.Mode = GPIO_MODE_ANALOG;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
+
   GPIO_InitStruct.Pin = GPIO_PIN_0|GPIO_PIN_1|GPIO_PIN_2|GPIO_PIN_3;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+
   GPIO_InitStruct.Pin = GPIO_PIN_4|GPIO_PIN_5|GPIO_PIN_6|GPIO_PIN_7;
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
   GPIO_InitStruct.Pull = GPIO_PULLUP;
   HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
+
   GPIO_InitStruct.Pin = GPIO_PIN_0|GPIO_PIN_1;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
@@ -425,35 +438,43 @@ static void MX_GPIO_Init(void)
 
 }
 
-
 void Error_Handler(void)
 {
   __disable_irq();
   while (1)
   {
   }
- 
 }
 
 #ifdef  USE_FULL_ASSERT
+
 void assert_failed(uint8_t *file, uint32_t line)
 {
-
+ 
 }
-#endif
+#endif 
 ```
 
 
+
+
+
+
 ## Output screen shots of proteus  :
-![image](https://github.com/kabilan22000284/EXPERIMENT--05-INTERFACING-A-4X4-MATRIX-KEYPAD-AND-DISPLAY-THE-OUTPUT-ON-LCD/assets/123469171/fd13649d-14c0-420e-99e5-3244ba212670)
+
+
+
+
+![Screenshot 2023-05-23 114225](https://github.com/deepikasrinivasans/EXPERIMENT--05-INTERFACING-A-4X4-MATRIX-KEYPAD-AND-DISPLAY-THE-OUTPUT-ON-LCD/assets/119393935/2ef32c87-dab2-4447-a30d-8341392a9b9e)
 
  
  
- ## CIRCUIT DIAGRAM (EXPORT THE GRAPHICS TO PDF AND ADD THE SCREEN SHOT HERE): 
-![image](https://github.com/kabilan22000284/EXPERIMENT--05-INTERFACING-A-4X4-MATRIX-KEYPAD-AND-DISPLAY-THE-OUTPUT-ON-LCD/assets/123469171/b34a0776-f3bb-4da5-8ad2-e15a18954298)
-
-
+ ## CIRCUIT DIAGRAM (EXPORT THE GRAPHICS TO PDF AND ADD THE SCREEN SHOT HERE):
  
+ 
+ 
+ ![Screenshot 2023-05-23 114317](https://github.com/deepikasrinivasans/EXPERIMENT--05-INTERFACING-A-4X4-MATRIX-KEYPAD-AND-DISPLAY-THE-OUTPUT-ON-LCD/assets/119393935/415bac97-40bb-452b-a72d-93107348cb29)
+
  
  
 ## Result :
